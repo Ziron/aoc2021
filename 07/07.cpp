@@ -4,28 +4,25 @@
 #include <vector>
 #include <cmath>
 #include <numeric>
+#include <algorithm>
 
 int main() {
     std::vector<int> positions;
 
-    double sum = 0.0;
-
     int x;
     while (std::cin >> x) {
-        std::cout << x;
-        
-        
         positions.push_back(x);
-        sum += x;
+        std::cin.ignore(2, ',');
     }
 
-    double average = sum / positions.size();
+    auto m = positions.begin() + positions.size()/2;
+    std::nth_element(positions.begin(), m, positions.end());
+    auto median = positions[positions.size()/2];
 
-    int target = static_cast<int>(std::round(average));
+    int target = median;
 
     double cost = std::transform_reduce(positions.begin(), positions.end(), 0.0, std::plus<>(), [target](const int& a) -> double { return std::abs(a - target); });
-    
-    double cost = target;
 
-    std::cout << cost << std::endl;
+    std::cout << "Move to " << target << std::endl;
+    std::cout << "Cost: " << cost << std::endl;
 }
