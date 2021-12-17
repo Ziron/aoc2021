@@ -19,18 +19,12 @@ int main() {
                 x += vx;
                 y += vy;
 
-                vy -= 1;
-                if (vx) vx -= 1;
+                vy--;
+                if (vx) vx--;
                 
-                if (x > xmax || y < ymin) {
-                    // Missed
-                    break;
-                }
+                if (x > xmax || y < ymin) break; // Missed
 
-                if (vx <= 0 && x < xmin) {
-                    // Missed
-                    break;
-                }
+                if (vx <= 0 && x < xmin) break; // Missed
 
                 if (xmin <= x && x <= xmax && ymin <= y && y <= ymax) {
                     // Hit
